@@ -1,73 +1,117 @@
-# Welcome to your Lovable project
+# Top Nerd Universe
+
+Um portal de notícias sobre games, tecnologia e cultura geek.
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/c075e4fa-0ae9-419a-9734-a2b5d96606d3
 
-## How can I edit this code?
+## Como editar este código?
 
-There are several ways of editing your application.
+Existem várias maneiras de editar esta aplicação.
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c075e4fa-0ae9-419a-9734-a2b5d96606d3) and start prompting.
+Simplesmente visite o [Lovable Project](https://lovable.dev/projects/c075e4fa-0ae9-419a-9734-a2b5d96606d3) e comece a fazer solicitações.
 
-Changes made via Lovable will be committed automatically to this repo.
+As alterações feitas via Lovable serão automaticamente confirmadas neste repositório.
 
-**Use your preferred IDE**
+**Use seu IDE preferido**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Se você quiser trabalhar localmente usando seu próprio IDE, você pode clonar este repositório e enviar alterações. As alterações enviadas também serão refletidas no Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+O único requisito é ter Node.js e npm instalados - [instale com nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
+Siga estes passos:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Passo 1: Clone o repositório usando a URL Git do projeto.
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Passo 2: Navegue até o diretório do projeto.
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
+# Passo 3: Instale as dependências necessárias.
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Passo 4: Inicie o servidor de desenvolvimento com recarga automática e visualização instantânea.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+**Edite um arquivo diretamente no GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Navegue até o(s) arquivo(s) desejado(s).
+- Clique no botão "Edit" (ícone de lápis) no canto superior direito da visualização do arquivo.
+- Faça suas alterações e confirme-as.
 
 **Use GitHub Codespaces**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Navegue até a página principal do seu repositório.
+- Clique no botão "Code" (botão verde) próximo ao canto superior direito.
+- Selecione a guia "Codespaces".
+- Clique em "New codespace" para iniciar um novo ambiente Codespace.
+- Edite os arquivos diretamente no Codespace e confirme e envie suas alterações quando terminar.
 
-## What technologies are used for this project?
+## Quais tecnologias são usadas neste projeto?
 
-This project is built with:
+Este projeto é construído com:
 
 - Vite
 - TypeScript
 - React
 - shadcn-ui
 - Tailwind CSS
+- React Router DOM
 
-## How can I deploy this project?
+## Como fazer deploy deste projeto na Vercel?
 
-Simply open [Lovable](https://lovable.dev/projects/c075e4fa-0ae9-419a-9734-a2b5d96606d3) and click on Share -> Publish.
+### Opção 1: Deploy direto do GitHub
 
-## Can I connect a custom domain to my Lovable project?
+1. Crie uma conta na [Vercel](https://vercel.com) se ainda não tiver.
+2. Na dashboard da Vercel, clique em "Add New..." e depois "Project".
+3. Importe seu repositório do GitHub.
+4. A Vercel detectará automaticamente que é um projeto Vite/React.
+5. Configure as variáveis de ambiente se necessário.
+6. Clique em "Deploy".
 
-Yes, you can!
+### Opção 2: Deploy usando a Vercel CLI
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Instale a Vercel CLI globalmente:
+   ```sh
+   npm i -g vercel
+   ```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+2. Faça login na sua conta Vercel:
+   ```sh
+   vercel login
+   ```
+
+3. No diretório do projeto, execute:
+   ```sh
+   vercel
+   ```
+
+4. Siga as instruções na tela para completar o deploy.
+
+### Opção 3: Deploy manual
+
+1. Construa o projeto localmente:
+   ```sh
+   npm run build
+   ```
+
+2. Na dashboard da Vercel, clique em "Add New..." e depois "Project".
+3. Escolha a opção "Upload" e arraste a pasta `dist` gerada.
+4. Configure o projeto conforme necessário e clique em "Deploy".
+
+## Posso conectar um domínio personalizado ao meu projeto?
+
+Sim, você pode!
+
+Para conectar um domínio ao seu projeto na Vercel:
+
+1. Vá para o painel do seu projeto na Vercel.
+2. Navegue até "Settings" > "Domains".
+3. Adicione seu domínio e siga as instruções para configurar os registros DNS.
+
+Para mais informações, consulte a [documentação da Vercel sobre domínios personalizados](https://vercel.com/docs/projects/domains).

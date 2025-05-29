@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import SearchBar from "@/components/SearchBar";
 
@@ -47,12 +46,6 @@ const Header = () => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <SearchBar />
-            <Link to="/admin">
-              <Button variant="outline" size="sm" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300">
-                <User className="w-4 h-4 mr-2" />
-                Admin
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -79,14 +72,8 @@ const Header = () => {
                 {category.name}
               </Link>
             ))}
-            <div className="flex items-center space-x-4 pt-4 border-t border-purple-500/30">
+            <div className="flex items-center pt-4 border-t border-purple-500/30">
               <SearchBar />
-              <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="outline" size="sm" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white">
-                  <User className="w-4 h-4 mr-2" />
-                  Admin
-                </Button>
-              </Link>
             </div>
           </div>
         )}
