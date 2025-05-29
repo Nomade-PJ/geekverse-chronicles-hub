@@ -11,10 +11,10 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">GU</span>
+                <span className="text-white font-bold text-sm">TN</span>
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Geek Universe
+                Top Nerd Universe
               </span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
@@ -120,7 +120,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-purple-500/30 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Geek Universe. Todos os direitos reservados. 
+            © 2024 Top Nerd Universe. Todos os direitos reservados. 
             Feito com <Heart className="w-4 h-4 inline text-red-500" /> por uma equipe apaixonada por tecnologia.
           </p>
           <p className="text-gray-500 text-xs mt-2">

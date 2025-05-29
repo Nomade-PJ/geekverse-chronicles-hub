@@ -85,7 +85,7 @@ const Index = () => {
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-6">
-              GEEK UNIVERSE
+              TOP NERD UNIVERSE
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Seu portal definitivo para o mundo dos games, tecnologia e cultura geek
