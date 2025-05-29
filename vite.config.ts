@@ -21,11 +21,9 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      },
+    minify: 'esbuild',
+    esbuild: {
+      drop: ['console', 'debugger'],
     },
   },
 }));
