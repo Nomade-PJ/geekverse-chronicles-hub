@@ -9,10 +9,12 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Logo e Descrição */}
           <div className="md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">TN</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/lovable-uploads/14a7b62f-3345-4cfc-9dac-783e1c203574.png" 
+                alt="Top Nerd Universe Logo" 
+                className="w-10 h-10"
+              />
               <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Top Nerd Universe
               </span>
