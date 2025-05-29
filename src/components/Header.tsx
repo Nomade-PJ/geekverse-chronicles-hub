@@ -1,8 +1,9 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, User } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { Link } from "react-router-dom";
+import SearchBar from "@/components/SearchBar";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,20 +37,19 @@ const Header = () => {
               <Link
                 key={category.name}
                 to={category.path}
-                className="text-gray-300 hover:text-purple-400 transition-colors font-medium"
+                className="text-gray-300 hover:text-purple-400 transition-colors font-medium relative group"
               >
                 {category.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-300 hover:text-purple-400">
-              <Search className="w-4 h-4" />
-            </Button>
+            <SearchBar />
             <Link to="/admin">
-              <Button variant="outline" size="sm" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white">
+              <Button variant="outline" size="sm" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300">
                 <User className="w-4 h-4 mr-2" />
                 Admin
               </Button>
@@ -69,21 +69,19 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t border-purple-500/30">
+          <div className="md:hidden py-4 space-y-4 border-t border-purple-500/30 animate-fade-in">
             {categories.map((category) => (
               <Link
                 key={category.name}
                 to={category.path}
-                className="block text-gray-300 hover:text-purple-400 transition-colors font-medium"
+                className="block text-gray-300 hover:text-purple-400 transition-colors font-medium py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {category.name}
               </Link>
             ))}
             <div className="flex items-center space-x-4 pt-4 border-t border-purple-500/30">
-              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-purple-400">
-                <Search className="w-4 h-4" />
-              </Button>
+              <SearchBar />
               <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="outline" size="sm" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white">
                   <User className="w-4 h-4 mr-2" />

@@ -1,20 +1,15 @@
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar, User, Share2, ArrowRight } from "lucide-react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SocialShare from "@/components/SocialShare";
-import { Link } from "react-router-dom";
+import PostCard from "@/components/PostCard";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const Index = () => {
   const [featuredPost] = useState({
     id: 1,
     title: "Cyberpunk 2077: Phantom Liberty - A Redenção da CD Projekt RED",
-    excerpt: "Após anos de críticas, a expansão Phantom Liberty prova que Cyberpunk 2077 finalmente atingiu seu potencial. Descubra como a Night City evoluiu...",
-    content: "A jornada de Cyberpunk 2077 tem sido uma montanha-russa emocional para gamers ao redor do mundo...",
+    excerpt: "Após anos de críticas, a expansão Phantom Liberty prova que Cyberpunk 2077 finalmente atingiu seu potencial. Descubra como a Night City evoluiu e se tornou o jogo que sempre deveria ter sido desde o lançamento.",
     category: "Gaming",
     author: "Alex Rodriguez",
     date: "2024-01-15",
@@ -62,19 +57,18 @@ const Index = () => {
       date: "2024-01-11",
       image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600",
       readTime: "10 min"
+    },
+    {
+      id: 6,
+      title: "Steam Deck OLED: Vale a Pena o Upgrade?",
+      excerpt: "Comparamos a nova versão OLED do Steam Deck com o modelo original. Descubra todas as melhorias.",
+      category: "Reviews",
+      author: "PortableGamer",
+      date: "2024-01-10",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+      readTime: "7 min"
     }
   ]);
-
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      "Gaming": "bg-purple-500",
-      "Tecnologia": "bg-blue-500",
-      "Tutoriais": "bg-green-500",
-      "Notícias": "bg-orange-500",
-      "Reviews": "bg-red-500"
-    };
-    return colors[category as keyof typeof colors] || "bg-gray-500";
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
@@ -84,54 +78,30 @@ const Index = () => {
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-6 animate-fade-in">
               TOP NERD UNIVERSE
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Seu portal definitivo para o mundo dos games, tecnologia e cultura geek
             </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-6 py-3">
+                <span className="text-purple-400 font-semibold">+1000</span>
+                <span className="text-gray-300 ml-2">Artigos</span>
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-6 py-3">
+                <span className="text-pink-400 font-semibold">+50K</span>
+                <span className="text-gray-300 ml-2">Leitores</span>
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-6 py-3">
+                <span className="text-cyan-400 font-semibold">Daily</span>
+                <span className="text-gray-300 ml-2">Updates</span>
+              </div>
+            </div>
           </div>
 
           {/* Featured Post */}
-          <Card className="mb-12 bg-black/40 border-purple-500/30 overflow-hidden backdrop-blur-sm">
-            <div className="md:flex">
-              <div className="md:w-1/2">
-                <img 
-                  src={featuredPost.image} 
-                  alt={featuredPost.title}
-                  className="w-full h-64 md:h-full object-cover"
-                />
-              </div>
-              <div className="md:w-1/2 p-8">
-                <Badge className={`${getCategoryColor(featuredPost.category)} text-white mb-4`}>
-                  {featuredPost.category}
-                </Badge>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  {featuredPost.title}
-                </h2>
-                <p className="text-gray-300 mb-6">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center text-sm text-gray-400 space-x-4">
-                    <span className="flex items-center">
-                      <User className="w-4 h-4 mr-1" />
-                      {featuredPost.author}
-                    </span>
-                    <span className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {new Date(featuredPost.date).toLocaleDateString('pt-BR')}
-                    </span>
-                  </div>
-                  <Link to={`/post/${featuredPost.id}`}>
-                    <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-                      Ler mais <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <PostCard post={featuredPost} featured={true} />
         </div>
       </section>
 
@@ -143,51 +113,44 @@ const Index = () => {
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <Card key={post.id} className="bg-black/40 border-purple-500/30 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 group">
-                <CardHeader className="p-0">
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </CardHeader>
-                <CardContent className="p-6">
-                  <Badge className={`${getCategoryColor(post.category)} text-white mb-3`}>
-                    {post.category}
-                  </Badge>
-                  <CardTitle className="text-white mb-3 group-hover:text-purple-400 transition-colors">
-                    {post.title}
-                  </CardTitle>
-                  <p className="text-gray-300 text-sm mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between text-xs text-gray-400">
-                    <span className="flex items-center">
-                      <User className="w-3 h-3 mr-1" />
-                      {post.author}
-                    </span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <div className="flex items-center justify-between mt-4">
-                    <span className="text-xs text-gray-400">
-                      {new Date(post.date).toLocaleDateString('pt-BR')}
-                    </span>
-                    <div className="flex items-center space-x-2">
-                      <SocialShare 
-                        url={`/post/${post.id}`} 
-                        title={post.title}
-                      />
-                      <Link to={`/post/${post.id}`}>
-                        <Button size="sm" variant="outline" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white">
-                          Ler
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            {posts.map((post, index) => (
+              <div 
+                key={post.id} 
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <PostCard post={post} />
+              </div>
             ))}
+          </div>
+
+          {/* Load More Button */}
+          <div className="text-center mt-12">
+            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 transform">
+              Carregar Mais Posts
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-16 px-4 bg-black/20">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Fique por Dentro das Novidades
+          </h2>
+          <p className="text-gray-300 mb-8">
+            Receba as últimas notícias sobre games, tecnologia e cultura geek direto no seu email
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Seu melhor email"
+              className="flex-1 px-4 py-3 bg-black/40 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+            />
+            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 transform">
+              Inscrever-se
+            </button>
           </div>
         </div>
       </section>
