@@ -74,33 +74,9 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative py-12 md:py-20 px-4">
+      {/* Featured Post Section */}
+      <section className="relative py-8 md:py-12 px-4">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 md:mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-4 md:mb-6 animate-fade-in">
-              TOP NERD UNIVERSE
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
-              Seu portal definitivo para o mundo dos games, tecnologia e cultura geek
-            </p>
-            <div className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3 md:gap-4 animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
-              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-4 md:px-6 py-2 md:py-3">
-                <span className="text-purple-400 font-semibold text-sm md:text-base">+1000</span>
-                <span className="text-gray-300 ml-2 text-sm md:text-base">Artigos</span>
-              </div>
-              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-4 md:px-6 py-2 md:py-3">
-                <span className="text-pink-400 font-semibold text-sm md:text-base">+50K</span>
-                <span className="text-gray-300 ml-2 text-sm md:text-base">Leitores</span>
-              </div>
-              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-4 md:px-6 py-2 md:py-3">
-                <span className="text-cyan-400 font-semibold text-sm md:text-base">Daily</span>
-                <span className="text-gray-300 ml-2 text-sm md:text-base">Updates</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Featured Post */}
           <PostCard post={featuredPost} featured={true} />
         </div>
       </section>
