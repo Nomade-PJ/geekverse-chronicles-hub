@@ -89,7 +89,7 @@ const FeaturedPostsCarousel = ({
         <CarouselContent className="-ml-1 md:-ml-2">
           {posts.map((post) => (
             <CarouselItem key={post.id} className="pl-1 md:pl-2 md:basis-full">
-              <div className="bg-black/40 border border-purple-500/30 overflow-hidden backdrop-blur-sm rounded-xl h-[220px] md:h-[250px]">
+              <div className="bg-black/40 border border-purple-500/30 overflow-hidden backdrop-blur-sm rounded-xl h-[220px] md:h-[300px] lg:h-[400px]">
                 <div className="relative h-full">
                   {/* Image as background with overlay */}
                   <div className="absolute inset-0 z-0">
@@ -102,27 +102,27 @@ const FeaturedPostsCarousel = ({
                   </div>
                   
                   {/* Content */}
-                  <div className="relative z-10 flex flex-col h-full p-4 justify-end">
-                    <Badge className={`${getCategoryColor(post.category)} self-start text-white text-xs px-3 py-1 rounded-full mb-2`}>
+                  <div className="relative z-10 flex flex-col h-full p-4 md:p-6 lg:p-8 justify-end">
+                    <Badge className={`${getCategoryColor(post.category)} self-start text-white text-xs md:text-sm px-3 py-1 rounded-full mb-2 md:mb-3`}>
                       {post.category}
                     </Badge>
                     
-                    <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-1 line-clamp-2">
+                    <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-white mb-1 md:mb-2 line-clamp-2 max-w-3xl">
                       {post.title}
                     </h2>
                     
-                    <p className="text-gray-300 mb-3 text-xs md:text-sm line-clamp-2 max-w-3xl">
+                    <p className="text-gray-300 mb-3 text-xs md:text-sm lg:text-base line-clamp-2 lg:line-clamp-3 max-w-3xl lg:max-w-4xl">
                       {post.excerpt}
                     </p>
                     
                     <div className="flex items-center justify-between mt-auto">
-                      <div className="flex items-center text-xs text-gray-400">
+                      <div className="flex items-center text-xs md:text-sm text-gray-400">
                         <span className="mr-3">{post.author}</span>
                         <span>{post.readTime}</span>
                       </div>
                       
                       <Link to={`/post/${post.id}`}>
-                        <Button className="bg-purple-500 hover:bg-purple-600 text-xs px-4 py-1 h-7 rounded-full">
+                        <Button className="bg-purple-500 hover:bg-purple-600 text-xs md:text-sm px-4 py-1 h-7 md:h-9 md:px-5 rounded-full">
                           Ler mais
                         </Button>
                       </Link>
@@ -135,29 +135,29 @@ const FeaturedPostsCarousel = ({
         </CarouselContent>
         
         <CarouselPrevious 
-          className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 border-none text-white h-6 w-6 md:h-8 md:w-8"
+          className="absolute left-1 md:left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 border-none text-white h-6 w-6 md:h-10 md:w-10 lg:h-12 lg:w-12"
           variant="ghost"
         >
-          <ChevronLeft className="h-3 w-3 md:h-4 md:w-4" />
+          <ChevronLeft className="h-3 w-3 md:h-5 md:w-5 lg:h-6 lg:w-6" />
         </CarouselPrevious>
         
         <CarouselNext 
-          className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 border-none text-white h-6 w-6 md:h-8 md:w-8"
+          className="absolute right-1 md:right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 border-none text-white h-6 w-6 md:h-10 md:w-10 lg:h-12 lg:w-12"
           variant="ghost"
         >
-          <ChevronRight className="h-3 w-3 md:h-4 md:w-4" />
+          <ChevronRight className="h-3 w-3 md:h-5 md:w-5 lg:h-6 lg:w-6" />
         </CarouselNext>
       </Carousel>
       
       {/* Indicators */}
-      <div className="flex justify-center gap-1 mt-2">
+      <div className="flex justify-center gap-1 md:gap-2 mt-2 md:mt-4">
         {posts.map((_, index) => (
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
             className={cn(
-              "w-1.5 h-1.5 rounded-full transition-all",
-              index === current ? "bg-purple-500 w-3" : "bg-gray-400/50"
+              "w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all",
+              index === current ? "bg-purple-500 w-3 md:w-4" : "bg-gray-400/50"
             )}
             aria-label={`Go to slide ${index + 1}`}
           />

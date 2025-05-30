@@ -108,27 +108,39 @@ const Index = () => {
       <Header />
       
       {/* Featured Posts Carousel */}
-      <section className="relative py-4 md:py-6">
-        <div className="w-[90%] max-w-[400px] md:max-w-[500px] mx-auto">
+      <section className="relative py-4 md:py-8 lg:py-12">
+        <div className="w-[90%] max-w-[400px] md:max-w-[700px] lg:max-w-[1000px] xl:max-w-[1200px] mx-auto">
           <FeaturedPostsCarousel posts={featuredPosts} />
         </div>
       </section>
 
       {/* Latest Posts */}
-      <section className="py-8 md:py-12">
-        <div className="container mx-auto">
+      <section className="py-8 md:py-12 lg:py-16">
+        <div className="container mx-auto px-4">
           
           {/* Code snippet style posts */}
-          <div className="max-w-md mx-auto">
-            {posts.slice(0, 3).map((post) => (
-              <div key={post.id}>
-                <CodeSnippetCard post={post} />
-              </div>
-            ))}
+          <div className="max-w-md mx-auto lg:max-w-none lg:mx-0">
+            {/* Posts grid for desktop */}
+            <div className="hidden lg:grid lg:grid-cols-3 lg:gap-8">
+              {posts.map((post) => (
+                <div key={post.id} className="transform transition-all duration-300 hover:-translate-y-2">
+                  <CodeSnippetCard post={post} />
+                </div>
+              ))}
+            </div>
+            
+            {/* Posts for mobile - only show first 3 */}
+            <div className="lg:hidden">
+              {posts.slice(0, 3).map((post) => (
+                <div key={post.id} className="mb-6">
+                  <CodeSnippetCard post={post} />
+                </div>
+              ))}
+            </div>
             
             {/* Load More Button */}
-            <div className="text-center mt-6 mb-8">
-              <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium text-sm">
+            <div className="text-center mt-8 mb-8">
+              <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium text-sm md:text-base md:px-8 md:py-3 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30">
                 Ver Mais
               </button>
             </div>
@@ -137,15 +149,15 @@ const Index = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-12 md:py-16 px-4 bg-black/20">
+      <section className="py-12 md:py-16 lg:py-20 px-4 bg-black/20">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
             Fique por Dentro das Novidades
           </h2>
-          <p className="text-gray-300 mb-6 md:mb-8 px-4">
+          <p className="text-gray-300 mb-6 md:mb-8 px-4 max-w-2xl mx-auto">
             Receba as últimas notícias sobre games, tecnologia e cultura geek direto no seu email
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-md mx-auto px-4">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-md md:max-w-lg mx-auto px-4">
             <input 
               type="email" 
               placeholder="Seu melhor email"
