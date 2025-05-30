@@ -65,14 +65,14 @@ const Header = () => {
           <>
             {/* Backdrop */}
             <div 
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-black/80 z-40 md:hidden"
               onClick={() => setIsMenuOpen(false)}
             />
             
             {/* Mobile Menu */}
-            <div className="fixed top-0 left-0 w-80 h-full bg-gradient-to-br from-purple-900/95 to-black/95 backdrop-blur-lg z-50 md:hidden animate-slide-in-left shadow-2xl border-r border-purple-500/30">
+            <div className="fixed top-0 left-0 w-80 h-full bg-gray-900 z-50 md:hidden animate-slide-in-left shadow-2xl border-r border-purple-500/30">
               {/* Menu Header */}
-              <div className="flex items-center justify-between p-6 border-b border-purple-500/30">
+              <div className="flex items-center justify-between p-6 border-b border-purple-500/30 bg-black">
                 <div className="flex items-center space-x-3">
                   <img 
                     src="/lovable-uploads/14a7b62f-3345-4cfc-9dac-783e1c203574.png" 
@@ -92,7 +92,7 @@ const Header = () => {
               </div>
 
               {/* Menu Content */}
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-6 bg-gray-900">
                 {/* Search Section */}
                 <div className="space-y-3">
                   <h3 className="text-gray-400 text-sm font-medium uppercase tracking-wider">Buscar</h3>
@@ -101,7 +101,7 @@ const Header = () => {
                     <input 
                       type="text" 
                       placeholder="Buscar conteúdo..."
-                      className="w-full bg-black/30 border border-purple-500/30 rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400"
+                      className="w-full bg-black/50 border border-purple-500/30 rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400"
                     />
                   </div>
                 </div>
