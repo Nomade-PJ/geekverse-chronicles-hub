@@ -1,4 +1,3 @@
-
 import { Heart, Github, Twitter, Instagram, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -7,18 +6,16 @@ const Footer = () => {
     <footer className="bg-black/60 border-t border-purple-500/30 backdrop-blur-md">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8">
-          {/* Logo e Descrição */}
-          <div className="md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/lovable-uploads/14a7b62f-3345-4cfc-9dac-783e1c203574.png" 
-                alt="Top Nerd Universe Logo" 
-                className="w-10 h-10"
-              />
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Top Nerd Universe
-              </span>
-            </div>
+          {/* Logo e Descrição - Centered */}
+          <div className="md:col-span-2 flex flex-col items-center text-center">
+            <img 
+              src="/lovable-uploads/14a7b62f-3345-4cfc-9dac-783e1c203574.png" 
+              alt="Top Nerd Universe Logo" 
+              className="w-16 h-16 mb-3"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+              Top Nerd Universe
+            </span>
             <p className="text-gray-400 mb-4 max-w-md">
               Seu portal definitivo para o mundo dos games, tecnologia e cultura geek. 
               Mantemos você atualizado com as últimas notícias, reviews e tutoriais.
@@ -123,7 +120,6 @@ const Footer = () => {
         <div className="border-t border-purple-500/30 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
             © 2024 Top Nerd Universe. Todos os direitos reservados. 
-            Feito com <Heart className="w-4 h-4 inline text-red-500" /> por uma equipe apaixonada por tecnologia.
           </p>
           <p className="text-gray-500 text-xs mt-2">
             Este site é destinado exclusivamente para fins educacionais e de entretenimento. 

@@ -1,21 +1,54 @@
-
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PostCard from "@/components/PostCard";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import FeaturedPostsCarousel from "@/components/FeaturedPostsCarousel";
+import CodeSnippetCard from "@/components/CodeSnippetCard";
 
 const Index = () => {
-  const [featuredPost] = useState({
-    id: 1,
-    title: "Cyberpunk 2077: Phantom Liberty - A Redenção da CD Projekt RED",
-    excerpt: "Após anos de críticas, a expansão Phantom Liberty prova que Cyberpunk 2077 finalmente atingiu seu potencial. Descubra como a Night City evoluiu e se tornou o jogo que sempre deveria ter sido desde o lançamento.",
-    category: "Gaming",
-    author: "Alex Rodriguez",
-    date: "2024-01-15",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800",
-    readTime: "8 min"
-  });
+  const [featuredPosts] = useState([
+    {
+      id: 1,
+      title: "Cyberpunk 2077: Phantom Liberty - A Redenção da CD Projekt RED",
+      excerpt: "Após anos de críticas, a expansão Phantom Liberty prova que Cyberpunk 2077 finalmente atingiu seu potencial. Descubra como a Night City evoluiu e se tornou o jogo que sempre deveria ter sido desde o lançamento.",
+      category: "Gaming",
+      author: "Alex Rodriguez",
+      date: "2024-01-15",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800",
+      readTime: "8 min"
+    },
+    {
+      id: 7,
+      title: "PlayStation 6: Rumores Apontam para Lançamento em 2026",
+      excerpt: "Documentos vazados sugerem que a Sony já está trabalhando no sucessor do PS5. Confira tudo o que sabemos até agora sobre o próximo console.",
+      category: "Gaming",
+      author: "Sarah Johnson",
+      date: "2024-01-16",
+      image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800",
+      readTime: "5 min"
+    },
+    {
+      id: 8,
+      title: "Windows 12: Microsoft Prepara Grande Atualização com IA Integrada",
+      excerpt: "O próximo sistema operacional da Microsoft promete revolucionar a experiência do usuário com recursos avançados de inteligência artificial.",
+      category: "Tecnologia",
+      author: "Tech Explorer",
+      date: "2024-01-17",
+      image: "https://images.unsplash.com/photo-1624953587687-daf255b6b80a?w=800",
+      readTime: "7 min"
+    },
+    {
+      id: 9,
+      title: "Starfield: Bethesda Anuncia Primeira Expansão para Março",
+      excerpt: "A aguardada expansão do RPG espacial trará novos planetas, missões e tecnologias para os jogadores explorarem.",
+      category: "Gaming",
+      author: "Cosmic Gamer",
+      date: "2024-01-18",
+      image: "https://images.unsplash.com/photo-1532289608746-8aaaa2b6a861?w=800",
+      readTime: "6 min"
+    }
+  ]);
 
   const [posts] = useState([
     {
@@ -74,38 +107,31 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
       <Header />
       
-      {/* Featured Post Section */}
-      <section className="relative py-8 md:py-12 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <PostCard post={featuredPost} featured={true} />
+      {/* Featured Posts Carousel */}
+      <section className="relative py-4 md:py-6">
+        <div className="w-[90%] max-w-[400px] md:max-w-[500px] mx-auto">
+          <FeaturedPostsCarousel posts={featuredPosts} />
         </div>
       </section>
 
       {/* Latest Posts */}
-      <section className="py-12 md:py-16 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center">
-            Últimas Postagens
-          </h2>
+      <section className="py-8 md:py-12">
+        <div className="container mx-auto">
           
-          {/* Mobile: Single column, Tablet: 2 columns, Desktop: 3 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-            {posts.map((post, index) => (
-              <div 
-                key={post.id} 
-                className="animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <PostCard post={post} />
+          {/* Code snippet style posts */}
+          <div className="max-w-md mx-auto">
+            {posts.slice(0, 3).map((post) => (
+              <div key={post.id}>
+                <CodeSnippetCard post={post} />
               </div>
             ))}
-          </div>
-
-          {/* Load More Button */}
-          <div className="text-center mt-8 md:mt-12">
-            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 md:px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 transform text-sm md:text-base">
-              Carregar Mais Posts
-            </button>
+            
+            {/* Load More Button */}
+            <div className="text-center mt-6 mb-8">
+              <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium text-sm">
+                Ver Mais
+              </button>
+            </div>
           </div>
         </div>
       </section>
