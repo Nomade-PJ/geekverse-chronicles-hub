@@ -75,27 +75,27 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-12 md:py-20 px-4">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-6 animate-fade-in">
+          <div className="text-center mb-8 md:mb-12">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-4 md:mb-6 animate-fade-in">
               TOP NERD UNIVERSE
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
               Seu portal definitivo para o mundo dos games, tecnologia e cultura geek
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-6 py-3">
-                <span className="text-purple-400 font-semibold">+1000</span>
-                <span className="text-gray-300 ml-2">Artigos</span>
+            <div className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3 md:gap-4 animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
+              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-4 md:px-6 py-2 md:py-3">
+                <span className="text-purple-400 font-semibold text-sm md:text-base">+1000</span>
+                <span className="text-gray-300 ml-2 text-sm md:text-base">Artigos</span>
               </div>
-              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-6 py-3">
-                <span className="text-pink-400 font-semibold">+50K</span>
-                <span className="text-gray-300 ml-2">Leitores</span>
+              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-4 md:px-6 py-2 md:py-3">
+                <span className="text-pink-400 font-semibold text-sm md:text-base">+50K</span>
+                <span className="text-gray-300 ml-2 text-sm md:text-base">Leitores</span>
               </div>
-              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-6 py-3">
-                <span className="text-cyan-400 font-semibold">Daily</span>
-                <span className="text-gray-300 ml-2">Updates</span>
+              <div className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg px-4 md:px-6 py-2 md:py-3">
+                <span className="text-cyan-400 font-semibold text-sm md:text-base">Daily</span>
+                <span className="text-gray-300 ml-2 text-sm md:text-base">Updates</span>
               </div>
             </div>
           </div>
@@ -106,13 +106,14 @@ const Index = () => {
       </section>
 
       {/* Latest Posts */}
-      <section className="py-16 px-4">
+      <section className="py-12 md:py-16 px-4">
         <div className="container mx-auto max-w-7xl">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center">
             Últimas Postagens
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Mobile: Single column, Tablet: 2 columns, Desktop: 3 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {posts.map((post, index) => (
               <div 
                 key={post.id} 
@@ -125,8 +126,8 @@ const Index = () => {
           </div>
 
           {/* Load More Button */}
-          <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 transform">
+          <div className="text-center mt-8 md:mt-12">
+            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 md:px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 transform text-sm md:text-base">
               Carregar Mais Posts
             </button>
           </div>
@@ -134,21 +135,21 @@ const Index = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 px-4 bg-black/20">
+      <section className="py-12 md:py-16 px-4 bg-black/20">
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Fique por Dentro das Novidades
           </h2>
-          <p className="text-gray-300 mb-8">
+          <p className="text-gray-300 mb-6 md:mb-8 px-4">
             Receba as últimas notícias sobre games, tecnologia e cultura geek direto no seu email
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-md mx-auto px-4">
             <input 
               type="email" 
               placeholder="Seu melhor email"
-              className="flex-1 px-4 py-3 bg-black/40 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+              className="flex-1 px-4 py-3 bg-black/40 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 text-sm md:text-base"
             />
-            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 transform">
+            <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 transform text-sm md:text-base">
               Inscrever-se
             </button>
           </div>
