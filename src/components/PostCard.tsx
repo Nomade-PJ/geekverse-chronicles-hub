@@ -34,27 +34,27 @@ const PostCard = ({ post, featured = false }: PostCardProps) => {
 
   if (featured) {
     return (
-      <Card className="mb-8 md:mb-12 bg-black/40 border-purple-500/30 overflow-hidden backdrop-blur-sm hover:bg-black/60 transition-all duration-300 rounded-2xl">
-        <div className="md:flex">
+      <Card className="mb-6 md:mb-8 bg-black/50 border-purple-500/40 overflow-hidden backdrop-blur-sm hover:bg-black/60 transition-all duration-300 rounded-2xl shadow-xl">
+        <div className="md:flex max-w-4xl mx-auto">
           <div className="md:w-1/2">
             <img 
               src={post.image} 
               alt={post.title}
-              className="w-full h-56 md:h-full object-cover hover:scale-105 transition-transform duration-300"
+              className="w-full h-48 md:h-64 lg:h-72 object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="md:w-1/2 p-6 md:p-8">
-            <Badge className={`${getCategoryColor(post.category)} text-white mb-4 text-sm px-3 py-1 rounded-full`}>
+          <div className="md:w-1/2 p-4 md:p-6 lg:p-8">
+            <Badge className={`${getCategoryColor(post.category)} text-white mb-3 md:mb-4 text-xs md:text-sm px-3 py-1 rounded-full`}>
               {post.category}
             </Badge>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4 hover:text-purple-400 transition-colors leading-tight">
+            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-3 md:mb-4 hover:text-purple-400 transition-colors leading-tight line-clamp-2">
               {post.title}
             </h2>
-            <p className="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
+            <p className="text-gray-300 mb-4 md:mb-6 text-sm md:text-base leading-relaxed line-clamp-3">
               {post.excerpt}
             </p>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center text-xs md:text-sm text-gray-400 space-x-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 md:gap-4">
+              <div className="flex items-center text-xs md:text-sm text-gray-400 space-x-3 md:space-x-4">
                 <span className="flex items-center">
                   <User className="w-3 h-3 md:w-4 md:h-4 mr-1" />
                   {post.author}
@@ -64,7 +64,7 @@ const PostCard = ({ post, featured = false }: PostCardProps) => {
                   {post.readTime}
                 </span>
               </div>
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2 md:space-x-3">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -73,13 +73,13 @@ const PostCard = ({ post, featured = false }: PostCardProps) => {
                   <Share2 className="w-4 h-4" />
                 </Button>
                 <Link to={`/post/${post.id}`}>
-                  <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-sm px-6 py-2 rounded-full">
+                  <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-sm px-4 md:px-6 py-2 rounded-full">
                     Ler mais
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="mt-4 text-xs text-gray-500">
+            <div className="mt-3 md:mt-4 text-xs text-gray-500">
               {new Date(post.date).toLocaleDateString('pt-BR')}
             </div>
           </div>
@@ -89,27 +89,27 @@ const PostCard = ({ post, featured = false }: PostCardProps) => {
   }
 
   return (
-    <Card className="bg-black/40 border-purple-500/30 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 group rounded-2xl overflow-hidden shadow-lg hover:shadow-purple-500/20">
+    <Card className="h-full bg-black/50 border-purple-500/40 backdrop-blur-sm hover:bg-black/60 transition-all duration-300 group rounded-2xl overflow-hidden shadow-lg hover:shadow-purple-500/20 hover:scale-[1.02]">
       <CardHeader className="p-0 relative">
         <img 
           src={post.image} 
           alt={post.title}
-          className="w-full h-44 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-40 md:h-44 object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <Badge className={`${getCategoryColor(post.category)} text-white absolute top-3 left-3 text-xs px-3 py-1 rounded-full`}>
+        <Badge className={`${getCategoryColor(post.category)} text-white absolute top-3 left-3 text-xs px-3 py-1 rounded-full shadow-lg`}>
           {post.category}
         </Badge>
       </CardHeader>
-      <CardContent className="p-4 md:p-6">
-        <CardTitle className="text-white mb-3 group-hover:text-purple-400 transition-colors text-lg md:text-xl leading-tight line-clamp-2">
+      <CardContent className="p-4 md:p-5 flex flex-col h-full">
+        <CardTitle className="text-white mb-3 group-hover:text-purple-400 transition-colors text-base md:text-lg leading-tight line-clamp-2 flex-grow-0">
           {post.title}
         </CardTitle>
-        <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3">
+        <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3 flex-grow">
           {post.excerpt}
         </p>
         
         {/* Author and time info */}
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-4">
+        <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
           <div className="flex items-center space-x-3">
             <span className="flex items-center">
               <User className="w-3 h-3 mr-1" />
@@ -123,7 +123,7 @@ const PostCard = ({ post, featured = false }: PostCardProps) => {
         </div>
 
         {/* Date and actions */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-auto">
           <span className="text-xs text-gray-500">
             {new Date(post.date).toLocaleDateString('pt-BR')}
           </span>
