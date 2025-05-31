@@ -1,5 +1,6 @@
+
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { User } from '@/lib/types';
 
 export function useAuth() {
@@ -133,4 +134,4 @@ export function useAuth() {
     signIn,
     signOut
   };
-} 
+}
