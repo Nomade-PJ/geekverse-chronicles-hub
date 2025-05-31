@@ -7,24 +7,12 @@ import { Navigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { testSupabaseConnection } from "@/lib/supabase-config";
 
 const AdminExample = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [connectionStatus, setConnectionStatus] = useState<string>("checking");
   const { toast } = useToast();
   const { user, isLoading, error, isAuthenticated, isAdmin, signIn, signOut } = useAuth();
-
-  // Teste de conexão ao carregar o componente
-  useEffect(() => {
-    const checkConnection = async () => {
-      console.log('Verificando conexão com Supabase...');
-      const isConnected = await testSupabaseConnection();
-      setConnectionStatus(isConnected ? 'connected' : 'error');
-    };
-    checkConnection();
-  }, []);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -94,18 +82,6 @@ const AdminExample = () => {
                 Top Nerd Admin
               </CardTitle>
             </div>
-            
-            {/* Status da conexão */}
-            <div className="mb-4 p-3 rounded-lg bg-black/20 border border-purple-500/20">
-              <p className="text-sm text-gray-300">Status da conexão:</p>
-              <p className={`text-sm font-medium ${
-                connectionStatus === 'connected' ? 'text-green-400' : 
-                connectionStatus === 'error' ? 'text-red-400' : 'text-yellow-400'
-              }`}>
-                {connectionStatus === 'connected' ? '✅ Conectado ao Supabase' : 
-                 connectionStatus === 'error' ? '❌ Erro na conexão' : '⏳ Verificando...'}
-              </p>
-            </div>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -116,7 +92,7 @@ const AdminExample = () => {
                 <Input
                   id="username"
                   type="email"
-                  placeholder="portaltopnerduniverse@gmail.com"
+                  placeholder="seu@email.com"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="bg-black/40 border-purple-500/30 text-white"
@@ -140,9 +116,8 @@ const AdminExample = () => {
               <Button 
                 type="submit" 
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
-                disabled={connectionStatus !== 'connected'}
               >
-                {connectionStatus === 'connected' ? 'Entrar' : 'Aguarde...'}
+                Entrar
               </Button>
               
               {error && (
@@ -150,12 +125,6 @@ const AdminExample = () => {
                   <p className="text-red-400 text-sm">{error}</p>
                 </div>
               )}
-              
-              <div className="text-xs text-gray-400 mt-4">
-                <p>Credenciais do projeto:</p>
-                <p>Project ID: qyigukjmmqrpapehfwoy</p>
-                <p>URL: https://qyigukjmmqrpapehfwoy.supabase.co</p>
-              </div>
             </form>
           </CardContent>
         </Card>
