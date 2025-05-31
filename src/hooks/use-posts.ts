@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { Post, PostWithRelations } from '@/lib/types';
 
 export function usePosts() {
@@ -165,4 +165,4 @@ export function usePosts() {
     updatePost,
     deletePost
   };
-} 
+}
