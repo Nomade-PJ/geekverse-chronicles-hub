@@ -39,7 +39,7 @@ export function useAuth() {
           setUser({
             id: userData.user.id,
             email: userData.user.email || '',
-            role: profileData?.role || 'user',
+            role: (profileData?.role as 'admin' | 'editor' | 'user') || 'user',
             created_at: userData.user.created_at
           });
         }
@@ -70,7 +70,7 @@ export function useAuth() {
         setUser({
           id: session.user.id,
           email: session.user.email || '',
-          role: profileData?.role || 'user',
+          role: (profileData?.role as 'admin' | 'editor' | 'user') || 'user',
           created_at: session.user.created_at
         });
       } else if (event === 'SIGNED_OUT') {
