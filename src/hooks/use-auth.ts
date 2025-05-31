@@ -15,37 +15,71 @@ export function useAuth() {
         setIsLoading(true);
         setError(null);
         
+        console.log('Verificando sessão ativa...');
         const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
         
-        if (sessionError) throw sessionError;
+        if (sessionError) {
+          console.error('Erro ao verificar sessão:', sessionError);
+          throw sessionError;
+        }
         
         if (sessionData?.session) {
+          console.log('Sessão encontrada, buscando dados do usuário...');
           const { data: userData, error: userError } = await supabase.auth.getUser();
           
-          if (userError) throw userError;
+          if (userError) {
+            console.error('Erro ao buscar dados do usuário:', userError);
+            throw userError;
+          }
           
-          // Fetch user role from custom table if needed
+          console.log('Buscando perfil do usuário na tabela profiles...');
+          // Fetch user role from profiles table
           const { data: profileData, error: profileError } = await supabase
             .from('profiles')
             .select('role')
             .eq('id', userData.user.id)
             .single();
           
-          if (profileError && profileError.code !== 'PGRST116') {
-            // PGRST116 is the error code for "no rows returned"
-            throw profileError;
+          if (profileError) {
+            console.error('Erro ao buscar perfil:', profileError);
+            // Se o perfil não existir, vamos criar um com role 'user'
+            if (profileError.code === 'PGRST116') {
+              console.log('Perfil não encontrado, criando perfil padrão...');
+              const { data: newProfile, error: createError } = await supabase
+                .from('profiles')
+                .insert([{ id: userData.user.id, role: 'user' }])
+                .select('role')
+                .single();
+              
+              if (createError) {
+                console.error('Erro ao criar perfil:', createError);
+                throw createError;
+              }
+              
+              setUser({
+                id: userData.user.id,
+                email: userData.user.email || '',
+                role: (newProfile?.role as 'admin' | 'editor' | 'user') || 'user',
+                created_at: userData.user.created_at
+              });
+            } else {
+              throw profileError;
+            }
+          } else {
+            console.log('Perfil encontrado:', profileData);
+            setUser({
+              id: userData.user.id,
+              email: userData.user.email || '',
+              role: (profileData?.role as 'admin' | 'editor' | 'user') || 'user',
+              created_at: userData.user.created_at
+            });
           }
-          
-          setUser({
-            id: userData.user.id,
-            email: userData.user.email || '',
-            role: (profileData?.role as 'admin' | 'editor' | 'user') || 'user',
-            created_at: userData.user.created_at
-          });
+        } else {
+          console.log('Nenhuma sessão ativa encontrada');
         }
-      } catch (err) {
-        console.error('Error checking session:', err);
-        setError('Failed to check authentication session');
+      } catch (err: any) {
+        console.error('Erro na verificação de sessão:', err);
+        setError(err.message || 'Erro ao verificar autenticação');
       } finally {
         setIsLoading(false);
       }
@@ -55,26 +89,38 @@ export function useAuth() {
     
     // Subscribe to auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('Mudança no estado de autenticação:', event);
+      
       if (event === 'SIGNED_IN' && session) {
-        // Fetch user role from custom table if needed
-        const { data: profileData, error: profileError } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', session.user.id)
-          .single();
-        
-        if (profileError && profileError.code !== 'PGRST116') {
-          console.error('Error fetching user profile:', profileError);
+        console.log('Usuário logado, buscando perfil...');
+        try {
+          // Fetch user role from profiles table
+          const { data: profileData, error: profileError } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', session.user.id)
+            .single();
+          
+          if (profileError && profileError.code !== 'PGRST116') {
+            console.error('Erro ao buscar perfil no login:', profileError);
+          }
+          
+          setUser({
+            id: session.user.id,
+            email: session.user.email || '',
+            role: (profileData?.role as 'admin' | 'editor' | 'user') || 'user',
+            created_at: session.user.created_at
+          });
+          
+          setError(null);
+        } catch (err: any) {
+          console.error('Erro ao processar login:', err);
+          setError(err.message);
         }
-        
-        setUser({
-          id: session.user.id,
-          email: session.user.email || '',
-          role: (profileData?.role as 'admin' | 'editor' | 'user') || 'user',
-          created_at: session.user.created_at
-        });
       } else if (event === 'SIGNED_OUT') {
+        console.log('Usuário deslogado');
         setUser(null);
+        setError(null);
       }
     });
     
@@ -89,17 +135,23 @@ export function useAuth() {
       setIsLoading(true);
       setError(null);
       
+      console.log('Tentando fazer login com:', email);
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
       
-      if (error) throw error;
+      if (error) {
+        console.error('Erro no login:', error);
+        throw error;
+      }
       
+      console.log('Login realizado com sucesso:', data);
       return true;
     } catch (err: any) {
-      console.error('Error signing in:', err);
-      setError(err.message || 'Failed to sign in');
+      console.error('Erro no signIn:', err);
+      setError(err.message || 'Falha ao fazer login');
       return false;
     } finally {
       setIsLoading(false);
@@ -111,14 +163,20 @@ export function useAuth() {
       setIsLoading(true);
       setError(null);
       
+      console.log('Fazendo logout...');
+      
       const { error } = await supabase.auth.signOut();
       
-      if (error) throw error;
+      if (error) {
+        console.error('Erro no logout:', error);
+        throw error;
+      }
       
+      console.log('Logout realizado com sucesso');
       return true;
     } catch (err: any) {
-      console.error('Error signing out:', err);
-      setError(err.message || 'Failed to sign out');
+      console.error('Erro no signOut:', err);
+      setError(err.message || 'Falha ao fazer logout');
       return false;
     } finally {
       setIsLoading(false);
