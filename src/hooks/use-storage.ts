@@ -1,5 +1,6 @@
+
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 
 export function useStorage() {
   const [isUploading, setIsUploading] = useState(false);
@@ -28,17 +29,21 @@ export function useStorage() {
       const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
       const filePath = path ? `${path}/${fileName}` : fileName;
 
+      // Simula progresso durante o upload
+      const progressInterval = setInterval(() => {
+        setProgress(prev => Math.min(prev + 0.1, 0.9));
+      }, 100);
+
       // Upload do arquivo
       const { data, error: uploadError } = await supabase.storage
         .from(bucketName)
         .upload(filePath, file, {
           cacheControl: '3600',
           upsert: true,
-          onUploadProgress: (progress) => {
-            const percent = progress.loaded / progress.total;
-            setProgress(percent);
-          },
         });
+
+      clearInterval(progressInterval);
+      setProgress(1);
 
       if (uploadError) throw uploadError;
 
@@ -136,4 +141,4 @@ export function useStorage() {
     progress,
     error
   };
-} 
+}
